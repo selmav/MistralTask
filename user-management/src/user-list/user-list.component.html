@@ -1,0 +1,9 @@
+<div class="content">
+    <div class="header">
+        <h1>User Management</h1>
+        <button>Create User</button>
+    </div>
+    <app-grid *ngIf="userList$ | async as userList" [users]="userList.results" [activePage]="userList.page"
+        [totalPages]="userList.totalPages" (pageToggle)="onPageClick($event, userList.page)">
+    </app-grid>
+</div>

@@ -1,0 +1,32 @@
+<div class="table-wrapper">
+    <table>
+        <col span="5" class="content">
+        <col span="3" class="action">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr *ngFor="let user of users">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.status }}</td>
+            <td class="action"><a>Edit</a></td>
+            <td class="action"><a>Delete</a></td>
+            <td class="action"><a>Assign</a></td>
+        </tr>
+    </table>
+
+    <div class="paging">
+        <a *ngIf="activePage > 1" (click)="pageToggle.emit(-1)">&lt;</a>
+        <p>{{activePage}}</p>
+        <a *ngIf="activePage < totalPages" (click)="pageToggle.emit(1)">&gt;</a>
+    </div>
+</div>
