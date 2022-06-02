@@ -1,0 +1,55 @@
+@import "../../styles.scss";
+
+table {
+    border: 1px solid $gray;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+
+    flex: 1;
+
+    tr:first-of-type {
+        background-color: rgba($background, 0.5);
+    }
+}
+
+th,
+td {
+    padding: 1rem 0.7rem;
+    text-align: left;
+}
+
+.content {
+    width: 5rem;
+}
+
+td {
+    &:not(.action) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.action {
+    width: 3rem;
+    padding: 1rem 0.5rem;
+}
+
+.table-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.paging {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        margin: 0;
+    }
+}

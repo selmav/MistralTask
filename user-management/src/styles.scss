@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+// colors
+$gray: #d4d4d4;
+$background: #F5E9E2;
+$red: #773344;
+$black: #0B0014;
+$white: #ffffff;
+$blue: #4387C7;
+$blue-dark: #387DBC;
+
+html, button {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    color: $black;
+}
+
+a {
+    color: $red;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+}
+
+// md
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+//sm
+@media (max-width: 576px) {
+    html {
+        font-size: 12px;
+    }
+}
