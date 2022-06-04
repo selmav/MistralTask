@@ -1,7 +1,7 @@
 ﻿using Core;
+using Common;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace UserManagementApi.Controllers
@@ -17,10 +17,10 @@ namespace UserManagementApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserDto>> GetAll()
+        public async Task<BaseResponse<PagedList<UserDto>>> GetUsers([FromQuery] Pagination pagination)
         {
-            var users = await _userService.GetAllUsers();
-            return users;
+            var users = await _userService.GetAllUsers(pagination);
+            return BaseResponse<PagedList<UserDto>>.Ok(users);
         }
     }
 }

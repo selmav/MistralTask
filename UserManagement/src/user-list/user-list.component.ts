@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
+import { map, switchMap, take } from "rxjs/operators";
 import { UserService } from "src/services/user.service";
 import { User, UserList } from "src/shared/models";
 

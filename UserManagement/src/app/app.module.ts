@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { UserListComponent } from 'src/user-list/user-list.component';
 import { GridComponent } from 'src/user-list/grid/grid.component';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from 'src/services/api.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,15 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

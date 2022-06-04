@@ -1,7 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of, Subject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { UserList } from "src/shared/models";
+import { User, UserList } from "src/shared/models";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -11,31 +12,15 @@ export class UserService {
         switchMap((page) => this.getUsers(page)
         ));
 
+    constructor(private readonly http: HttpClient) {
+
+    }
+
     changePage(page: number = 1) {
         this.pageSubject.next(page);
     }
 
-    getUsers(page: number = 1): Observable<UserList> {
-        const res: UserList = {
-            page,
-            totalPages: 3,
-            results: [{
-                firstName: `Selma ${page}`,
-                lastName: 'Vucijak',
-                username: 'vselma',
-                password: 'selma',
-                email: 'selma@selma',
-                status: '?'
-            },
-            {
-                firstName: 'Selma afasffa',
-                lastName: 'Vucijak',
-                username: 'vselma ajfjjasjfa',
-                password: 'selma',
-                email: 'selma@selma',
-                status: '?'
-            }]
-        }
-        return of(res);
+    getUsers(page: number = 1, pageSize: number = 10): Observable<UserList> {
+        return this.http.get<UserList>(`User?page=${page}&pageSize=${pageSize}`);
     }
 }

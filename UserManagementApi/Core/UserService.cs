@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common;
 using Core.Models;
 using Data;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace Core
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsers()
+        public async Task<PagedList<UserDto>> GetAllUsers(Pagination pagination)
         {
-            var users = await _userRepository.GetAll();
+            var users = await _userRepository.GetUsers(pagination);
             var userDtos = new List<UserDto>();
             
             foreach(var user in users)
@@ -28,7 +29,13 @@ namespace Core
                 userDtos.Add(u);
             }
 
-            return userDtos;
+            return new PagedList<UserDto>
+            {
+                Results = userDtos,
+                Page = pagination.Page,
+                PageSize = pagination.PageSize,
+                TotalPages = pagination.TotalPages
+            };
         }
     }
 }

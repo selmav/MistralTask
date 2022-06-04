@@ -1,4 +1,5 @@
-﻿using Data.Entities;
+﻿using Common;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Data
             _table = context.Set<User>();
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> GetUsers(Pagination pagination = null)
         {
-            return await _table.ToListAsync();
+            return await _table.DoPaging(pagination).ToListAsync();
         }
     }
 }

@@ -1,8 +1,9 @@
-using AutoMapper;
+using System.Text.Json;
 using Core;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,12 @@ namespace UserManagementApi
                     });
             });
 
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            });
+            //services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
             services.AddAutoMapper(typeof(ServiceProfile));
 
             services.AddDbContext<UserManagementContext>(opt => 
@@ -66,6 +73,7 @@ namespace UserManagementApi
 
             app.UseHttpsRedirection();
 
+            app.UseCors();
             app.UseRouting();
 
             app.UseAuthorization();

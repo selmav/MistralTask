@@ -17,5 +17,6 @@ export interface Permission {
 export interface UserList {
     page: number;
     totalPages: number;
+    pageSize: number;
     results: User[]
 }
