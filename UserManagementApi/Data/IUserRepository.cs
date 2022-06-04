@@ -7,6 +7,6 @@ namespace Data
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetUsers(Pagination pagination = null);
+        Task<IEnumerable<User>> GetUsers(Pagination pagination = null, Ordering ordering = null);
     }
 }

@@ -6,6 +6,6 @@ namespace Core
 {
     public interface IUserService
     {
-        Task<PagedList<UserDto>> GetAllUsers(Pagination pagination);
+        Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering);
     }
 }

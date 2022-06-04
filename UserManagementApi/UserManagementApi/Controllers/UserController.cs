@@ -17,9 +17,9 @@ namespace UserManagementApi.Controllers
         }
 
         [HttpGet]
-        public async Task<BaseResponse<PagedList<UserDto>>> GetUsers([FromQuery] Pagination pagination)
+        public async Task<BaseResponse<PagedList<UserDto>>> GetUsers([FromQuery] Pagination pagination, [FromQuery] Ordering ordering)
         {
-            var users = await _userService.GetAllUsers(pagination);
+            var users = await _userService.GetAllUsers(pagination, ordering);
             return BaseResponse<PagedList<UserDto>>.Ok(users);
         }
     }

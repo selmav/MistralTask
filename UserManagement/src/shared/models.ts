@@ -1,3 +1,6 @@
+import { orderingField } from "src/user-list/grid/grid.component";
+import { OrderDirection } from "./ordering/ordering.component";
+
 export interface User {
     firstName: string;
     lastName: string;
@@ -14,9 +17,14 @@ export interface Permission {
 
 // Request/Response models
 
-export interface UserList {
+export interface Ordering {
+    key?: orderingField;
+    direction?: OrderDirection;
+}
+
+export interface UserList extends Ordering {
     page: number;
-    totalPages: number;
+    totalPages?: number;
     pageSize: number;
-    results: User[]
+    results?: User[]
 }

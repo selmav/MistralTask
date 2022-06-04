@@ -3,11 +3,21 @@
         <col span="5" class="content">
         <col span="3" class="action">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Status</th>
+            <th [class.active-ordering]="activeOrderingField === 'firstName'">
+                First Name <app-ordering (ordering)="onOrdering($event, 'firstName')"></app-ordering>
+            </th>
+            <th [class.active-ordering]="activeOrderingField === 'lastName'">
+                Last Name <app-ordering (ordering)="onOrdering($event, 'lastName')"></app-ordering>
+            </th>
+            <th [class.active-ordering]="activeOrderingField === 'username'">
+                Username <app-ordering (ordering)="onOrdering($event, 'username')"></app-ordering>
+            </th>
+            <th [class.active-ordering]="activeOrderingField === 'email'">
+                Email <app-ordering (ordering)="onOrdering($event, 'email')"></app-ordering>
+            </th>
+            <th [class.active-ordering]="activeOrderingField === 'status'">
+                Status <app-ordering (ordering)="onOrdering($event, 'status')"></app-ordering>
+            </th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>

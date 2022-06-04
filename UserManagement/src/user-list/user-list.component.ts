@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { map, switchMap, take } from "rxjs/operators";
 import { UserService } from "src/services/user.service";
-import { User, UserList } from "src/shared/models";
+import { Ordering, User, UserList } from "src/shared/models";
 
 @Component({
     selector: 'app-user-list',
@@ -22,5 +22,9 @@ export class UserListComponent implements OnInit {
 
     onPageClick(pageToggle: number, currentPage: number) {
         this.userService.changePage(currentPage + pageToggle);
+    }
+
+    onOrdering(ordering: Ordering) {
+        this.userService.changeRequest({ ...ordering, page: 1, pageSize: 10 });
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Common
 {
@@ -25,6 +26,16 @@ namespace Common
             return source is IOrderedQueryable ?
                 source.Skip(skipElements).Take(takeElements) :
                 source.OrderBy(p => 0).Skip(skipElements).Take(takeElements);
+        }
+
+        public static IQueryable<T> DoOrdering<T>(this IQueryable<T> source, Expression<System.Func<T, string>> exp, Direction direction)
+        {
+            if (exp == null)
+            {
+                return source;
+            }
+
+            return direction == Direction.Asc ? source.OrderBy(exp) : source.OrderByDescending(exp);
         }
     }
 }

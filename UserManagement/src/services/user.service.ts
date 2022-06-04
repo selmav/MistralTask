@@ -1,26 +1,72 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { User, UserList } from "src/shared/models";
+import { Ordering, User, UserList } from "src/shared/models";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private pageSubject = new BehaviorSubject<number>(1);
-    pageChangeAction$ = this.pageSubject.asObservable();
-    userList$ = this.pageChangeAction$.pipe(
-        switchMap((page) => this.getUsers(page)
-        ));
+    private changeRequestSubject = new BehaviorSubject<UserList>({ page: 1, pageSize: 10 });
+    changeRequestAction$ = this.changeRequestSubject.asObservable();
+
+    // private pageSubject = new BehaviorSubject<number>(1);
+    // pageChangeAction$ = this.pageSubject.asObservable();
+
+    // private orderingSubject = new BehaviorSubject<Ordering | null>(null);
+    // orderingChangeAction$ = this.orderingSubject.asObservable();
+
+    userList$ = this.changeRequestAction$.pipe(
+        switchMap((request) => this.getUsers(request))
+    );
 
     constructor(private readonly http: HttpClient) {
 
     }
 
     changePage(page: number = 1) {
-        this.pageSubject.next(page);
+        this.changeRequestSubject.next({ ...this.changeRequestSubject.value, page });
     }
 
-    getUsers(page: number = 1, pageSize: number = 10): Observable<UserList> {
-        return this.http.get<UserList>(`User?page=${page}&pageSize=${pageSize}`);
+    // changeOrdering(ordering: Ordering) {
+    //     this.orderingSubject.next(ordering);
+    // }
+
+    changeRequest(request: UserList) {
+        this.changeRequestSubject.next(request);
+    }
+
+    getUsers(request: UserList): Observable<UserList> {
+        return this.http.get<UserList>('User', { params: this.getQuery(request) });
+    }
+
+    private getQuery(request: UserList) {
+        const query: { [key: string]: any } = {};
+
+        const keys = Object.keys(request) as Array<keyof UserList>;
+        keys.forEach(key => {
+            if (!!request[key]) {
+                query[key as string] = request[key];
+            }
+        });
+
+        return query;
+
+        // if (request.page) {
+        //     query['page'] = request.page;
+        // }
+
+        // if (request.pageSize) {
+        //     query['pageSize'] = request.pageSize;
+        // }
+
+        // if (!!request.key) {
+        //     query['key'] = request.key;
+        // }
+
+        // if (!!request.direction) {
+        //     query['direction'] = request.direction;
+        // }
+
+        // return query;
     }
 }
