@@ -1,0 +1,44 @@
+@import "../../styles.scss";
+
+.background {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    animation: backgroundAnimation 0.3s;
+    animation-fill-mode: forwards;
+
+    @keyframes backgroundAnimation {
+        0% {
+            background: transparent;
+        }
+
+        100% {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    }
+}
+
+.content {
+    background-color: $white;
+    padding: 1.5rem;
+
+    max-width: 50rem;
+    width: 100%;
+}
+
+.close {
+    font-size: 1.5rem;
+    color: $red;
+    cursor: pointer;
+    display: block;
+}

@@ -43,5 +43,12 @@ namespace UserManagementApi.Controllers
             var user = await _userService.UpdateUser(userDto);
             return BaseResponse<UserDto>.Ok(user);
         }
+
+        [HttpDelete("{userId}")]
+        public async Task<BaseResponse<UserDto>> DeleteUser([FromRoute] int? userId)
+        {
+            await _userService.DeleteUser(userId);
+            return BaseResponse<UserDto>.Ok();
+        }
     }
 }

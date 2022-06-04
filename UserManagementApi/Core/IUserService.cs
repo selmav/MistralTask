@@ -13,5 +13,7 @@ namespace Core
         Task<UserDto> GetUserById(int? userId);
 
         Task<UserDto> UpdateUser(UserDto user);
+
+        Task<bool> DeleteUser(int? userId);
     }
 }

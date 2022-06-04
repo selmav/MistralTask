@@ -17,6 +17,7 @@ export class GridComponent {
 
     @Output() pageToggle = new EventEmitter<number>();
     @Output() ordering = new EventEmitter<Ordering>();
+    @Output() onDelete = new EventEmitter<number>();
 
     activeOrderingField: orderingField = null;
 

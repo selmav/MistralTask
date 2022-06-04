@@ -14,6 +14,12 @@ namespace Core.Models
             StatusCode = HttpStatusCode.OK
         };
 
+        public static BaseResponse<T> Ok() => new BaseResponse<T>
+        {
+            Result = null,
+            StatusCode = HttpStatusCode.OK
+        };
+
         public static BaseResponse<T> BadRequest() => new BaseResponse<T>
         {
             Result = null,

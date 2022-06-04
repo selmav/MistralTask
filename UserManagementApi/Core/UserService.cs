@@ -57,17 +57,7 @@ namespace Core
 
         public async Task<UserDto> GetUserById(int? userId)
         {
-            if (!userId.HasValue || userId.Value < 1)
-            {
-                throw new ArgumentException("Invalid user id");
-            }
-
-            var user = await _userRepository.GetUserById(userId.Value);
-
-            if (user == null)
-            {
-                throw new NotFoundException($"User with id {userId} was not found.");
-            }
+            var user = await GetDbUser(userId);
 
             return _mapper.Map<UserDto>(user);
         }
@@ -90,6 +80,30 @@ namespace Core
             await _userRepository.SaveAsync();
 
             return _mapper.Map<UserDto>(user);
+        }
+
+        public async Task<bool> DeleteUser(int? userId)
+        {
+            var user = await GetDbUser(userId);
+            await _userRepository.DeleteUser(user);
+            return true;
+        }
+
+        private async Task<User> GetDbUser(int? userId)
+        {
+            if (!userId.HasValue || userId.Value < 1)
+            {
+                throw new ArgumentException("Invalid user id");
+            }
+
+            var user = await _userRepository.GetUserById(userId.Value);
+
+            if (user == null)
+            {
+                throw new NotFoundException($"User with id {userId} was not found.");
+            }
+
+            return user;
         }
     }
 }

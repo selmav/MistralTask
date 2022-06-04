@@ -32,14 +32,39 @@ h1 {
 }
 
 button {
-    border: 1px solid $black;
     border-radius: 0.7rem;
-    color: $white;
-    background-color: $blue;
     padding: 0.5rem 1.2rem;
     cursor: pointer;
+    border: 1px solid $black;
+    color: $white;
+    background-color: $blue;
+    width: 8rem;
 
     &:hover {
         background-color: $blue-dark;
+    }
+}
+
+.delete-popup {
+    display: flex;
+    flex-direction: column;
+    min-height: 10rem;
+    justify-content: space-between;
+
+    .buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1.5rem;
+
+        .cancel {
+            border: 1px solid $blue;
+            background-color: $white;
+            color: $black;
+
+            &:hover {
+                background-color: rgba($blue, 0.1);
+            }
+        }
     }
 }

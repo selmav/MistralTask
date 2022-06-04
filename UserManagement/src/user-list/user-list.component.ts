@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, firstValueFrom, Observable, Subject } from "rxjs";
 import { map, switchMap, take } from "rxjs/operators";
 import { UserService } from "src/services/user.service";
 import { Ordering, User, UserList } from "src/shared/models";
@@ -10,7 +10,8 @@ import { Ordering, User, UserList } from "src/shared/models";
     styleUrls: ['user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-    userList$!: Observable<UserList>
+    userList$!: Observable<UserList>;
+    deleteUser$ = new BehaviorSubject<number | boolean>(false);
 
     constructor(private readonly userService: UserService) {
 
@@ -26,5 +27,12 @@ export class UserListComponent implements OnInit {
 
     onOrdering(ordering: Ordering) {
         this.userService.changeRequest({ ...ordering, page: 1, pageSize: 10 });
+    }
+
+    onDelete() {
+        const userId = Number(this.deleteUser$.value);
+        firstValueFrom(this.userService.deleteUser(userId))
+            .then(() => this.userService.changeRequest())
+            .finally(() => this.deleteUser$.next(false));
     }
 }

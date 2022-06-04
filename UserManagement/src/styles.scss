@@ -17,6 +17,8 @@ html, button {
 
 a {
     color: $red;
+    text-decoration: none;
+
     &:hover {
         cursor: pointer;
         text-decoration: underline;

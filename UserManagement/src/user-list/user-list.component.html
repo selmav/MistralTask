@@ -3,8 +3,9 @@
         <h1>User Management</h1>
         <a routerLink="/new-user"><button>Create User</button></a>
     </div>
-    <app-grid *ngIf="userList$ | async as userList; else noResults" [users]="userList.results ?? []" [activePage]="userList.page"
-        [totalPages]="userList.totalPages ?? 0" (pageToggle)="onPageClick($event, userList.page)" (ordering)="onOrdering($event)">
+    <app-grid *ngIf="userList$ | async as userList; else noResults" [users]="userList.results ?? []"
+        [activePage]="userList.page" [totalPages]="userList.totalPages ?? 0"
+        (pageToggle)="onPageClick($event, userList.page)" (ordering)="onOrdering($event)" (onDelete)="deleteUser$.next($event)">
     </app-grid>
 
     <ng-template #noResults>
@@ -13,3 +14,13 @@
         </div>
     </ng-template>
 </div>
+
+<app-popup *ngIf="!!(deleteUser$ | async)" (close)="deleteUser$.next(false)">
+    <div class="delete-popup">
+        <h2>Are you sure you want to delete this user?</h2>
+        <div class="buttons-wrapper">
+            <button class="cancel" (click)="deleteUser$.next(false)">No</button>
+            <button (click)="onDelete()">Yes</button>
+        </div>
+    </div>
+</app-popup>

@@ -40,12 +40,18 @@ namespace Data
         public async Task<User> AddUser(User user)
         {
             var res = (await _table.AddAsync(user)).Entity;
-            await _context.SaveChangesAsync();
+            await SaveAsync();
             return res;
         }
 
         public async Task<User> GetUserById(int userId) => await _table.FindAsync(userId);
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
+
+        public async Task DeleteUser(User user)
+        {
+            _table.Remove(user);
+            await SaveAsync();
+        }
     }
 }

@@ -21,8 +21,8 @@ export class UserService {
         this.changeRequestSubject.next({ ...this.changeRequestSubject.value, page });
     }
 
-    changeRequest(request: UserList) {
-        this.changeRequestSubject.next(request);
+    changeRequest(request?: UserList) {
+        this.changeRequestSubject.next(request ?? this.changeRequestSubject.value);
     }
 
     private getUsers(request: UserList): Observable<UserList> {
@@ -39,6 +39,10 @@ export class UserService {
 
     getUser(userId: number): Observable<User> {
         return this.http.get<User>(`User/${userId}`);
+    }
+
+    deleteUser(userId: number): Observable<void> {
+        return this.http.delete<void>(`User/${userId}`);
     }
 
     private getQuery(request: UserList) {

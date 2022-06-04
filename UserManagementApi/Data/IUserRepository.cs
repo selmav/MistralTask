@@ -14,5 +14,7 @@ namespace Data
         Task<User> GetUserById(int userId);
 
         Task SaveAsync();
+
+        Task DeleteUser(User user);
     }
 }
