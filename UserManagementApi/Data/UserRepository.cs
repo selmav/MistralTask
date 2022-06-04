@@ -43,5 +43,9 @@ namespace Data
             await _context.SaveChangesAsync();
             return res;
         }
+
+        public async Task<User> GetUserById(int userId) => await _table.FindAsync(userId);
+
+        public async Task SaveAsync() => await _context.SaveChangesAsync();
     }
 }

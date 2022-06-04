@@ -16,6 +16,15 @@ const routes: Routes = [
   {
     path: 'new-user',
     component: UserDetailsComponent
+  },
+  {
+    path: 'user',
+    children: [
+      {
+        path: ':userId',
+        component: UserDetailsComponent
+      }
+    ]
   }
 ];
 

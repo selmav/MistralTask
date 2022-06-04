@@ -54,5 +54,42 @@ namespace Core
 
             return _mapper.Map<UserDto>(user);
         }
+
+        public async Task<UserDto> GetUserById(int? userId)
+        {
+            if (!userId.HasValue || userId.Value < 1)
+            {
+                throw new ArgumentException("Invalid user id");
+            }
+
+            var user = await _userRepository.GetUserById(userId.Value);
+
+            if (user == null)
+            {
+                throw new NotFoundException($"User with id {userId} was not found.");
+            }
+
+            return _mapper.Map<UserDto>(user);
+        }
+
+        public async Task<UserDto> UpdateUser(UserDto userDto)
+        {
+            if (userDto == null || userDto.UserId < 1)
+            {
+                throw new ArgumentException();
+            }
+
+            var user = await _userRepository.GetUserById(userDto.UserId);
+
+            if (user == null)
+            {
+                throw new NotFoundException($"User with id {userDto.UserId} was not found");
+            }
+
+            user = _mapper.Map(userDto, user);
+            await _userRepository.SaveAsync();
+
+            return _mapper.Map<UserDto>(user);
+        }
     }
 }

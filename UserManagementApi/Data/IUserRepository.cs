@@ -10,5 +10,9 @@ namespace Data
         Task<IEnumerable<User>> GetUsers(Pagination pagination = null, Ordering ordering = null);
 
         Task<User> AddUser(User user);
+
+        Task<User> GetUserById(int userId);
+
+        Task SaveAsync();
     }
 }

@@ -9,5 +9,9 @@ namespace Core
         Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering);
 
         Task<UserDto> AddUser(UserDto user);
+
+        Task<UserDto> GetUserById(int? userId);
+
+        Task<UserDto> UpdateUser(UserDto user);
     }
 }

@@ -1,31 +1,35 @@
 <div class="content">
     <a routerLink="/user-list">&lt; Back to home</a>
     <form [formGroup]="form">
-        <div>
+        <div class="form-row">
             <label for="firstName">First Name: </label>
             <input type="text" formControlName="firstName" />
-            <span *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">This field is required.</span>
+            <span *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">This field is
+                required.</span>
         </div>
-        
-        <div>
+
+        <div class="form-row">
             <label for="lastName">Last Name: </label>
             <input type="text" formControlName="lastName" />
-            <span *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">This field is required.</span>
+            <span *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">This field is
+                required.</span>
         </div>
-        
-        <div>
+
+        <div class="form-row">
             <label for="username">Username: </label>
             <input type="text" formControlName="username" />
-            <span *ngIf="form.controls['username'].touched && !form.controls['username'].valid">This field is required.</span>
+            <span *ngIf="form.controls['username'].touched && !form.controls['username'].valid">This field is
+                required.</span>
         </div>
-        
-        <div>
+
+        <div class="form-row">
             <label for="password">Password: </label>
             <input type="password" formControlName="password" />
-            <span *ngIf="form.controls['password'].touched && !form.controls['password'].valid">This field is required.</span>
+            <span *ngIf="form.controls['password'].touched && !form.controls['password'].valid">This field is
+                required.</span>
         </div>
-        
-        <div>
+
+        <div class="form-row">
             <label for="email">Email: </label>
             <input type="email" formControlName="email" />
             <span *ngIf="form.controls['email'].touched && !form.controls['email'].valid">This field is required.</span>
@@ -33,6 +37,13 @@
 
         <!-- <label for="status">Status: </label>
         <input type="text" formControlName="firstName"/> -->
-        <button type="button" [ngClass]="(form.valid && (loading$ | async) === false) ? 'enabled': 'disabled'" (click)="onSubmit()">Submit</button>
+
+
+        <div class="buttons-wrapper">
+            <button *ngIf="userId" class="cancel">Cancel</button>
+            <button type="button" [ngClass]="(form.valid && (loading$ | async) === false) ? 'enabled': 'disabled'"
+            (click)="onSubmit()">{{userId ? 'Save' : 'Submit'}}</button>
+        </div>
+
     </form>
 </div>

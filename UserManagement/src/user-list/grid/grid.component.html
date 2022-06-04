@@ -28,7 +28,7 @@
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.status }}</td>
-            <td class="action"><a>Edit</a></td>
+            <td class="action"><a [routerLink]="['../', 'user', user.userId]">Edit</a></td>
             <td class="action"><a>Delete</a></td>
             <td class="action"><a>Assign</a></td>
         </tr>

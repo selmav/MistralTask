@@ -9,16 +9,9 @@ export class UserService {
     private changeRequestSubject = new BehaviorSubject<UserList>({ page: 1, pageSize: 10 });
     private changeRequestAction$ = this.changeRequestSubject.asObservable();
 
-    // private addUserSubject = new BehaviorSubject<User | null>(null);
-    // private addUserAction$ = this.addUserSubject.asObservable();
-
     userList$ = this.changeRequestAction$.pipe(
         switchMap((request) => this.getUsers(request))
     );
-
-    // addUser$ = this.addUserAction$.pipe(
-    //     switchMap((request) => this.addUser(request))
-    // );
 
     constructor(private readonly http: HttpClient) {
 
@@ -32,18 +25,21 @@ export class UserService {
         this.changeRequestSubject.next(request);
     }
 
-    // onAddUser(user: User) {
-    //     this.addUserSubject.next(user);
-    // }
-    
     private getUsers(request: UserList): Observable<UserList> {
         return this.http.get<UserList>('User', { params: this.getQuery(request) });
     }
-    
+
     addUser(user: User | null): Observable<void> {
         return this.http.post<void>('User', user);
     }
 
+    updateUser(user: User | null): Observable<void> {
+        return this.http.put<void>('User', user);
+    }
+
+    getUser(userId: number): Observable<User> {
+        return this.http.get<User>(`User/${userId}`);
+    }
 
     private getQuery(request: UserList) {
         const query: { [key: string]: any } = {};

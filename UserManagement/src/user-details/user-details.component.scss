@@ -7,9 +7,25 @@ form {
     max-width: 20rem;
     width: 100%;
 
-    div {
+    .form-row {
         display: flex;
         flex-direction: column;
+    }
+
+    .buttons-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .cancel {
+            cursor: pointer;
+            border: 1px solid $blue;
+            background-color: $white;
+
+            &:hover {
+                background-color: rgba($blue, 0.1);
+            }
+        }
     }
 
     button {

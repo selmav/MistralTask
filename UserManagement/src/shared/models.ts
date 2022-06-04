@@ -2,6 +2,7 @@ import { orderingField } from "src/user-list/grid/grid.component";
 import { OrderDirection } from "./ordering/ordering.component";
 
 export interface User {
+    userId?: number;
     firstName: string;
     lastName: string;
     username: string;
