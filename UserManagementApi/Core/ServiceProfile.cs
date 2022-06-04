@@ -8,7 +8,7 @@ namespace Core
     {
         public ServiceProfile()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ReverseMap();
         }
     }
 }

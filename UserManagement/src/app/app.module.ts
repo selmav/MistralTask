@@ -9,19 +9,23 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from 'src/services/api.interceptor';
 import { SharedModule } from 'src/shared/shared.module';
+import { UserDetailsComponent } from 'src/user-details/user-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    GridComponent
+    GridComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

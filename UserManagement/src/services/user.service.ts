@@ -7,17 +7,18 @@ import { Ordering, User, UserList } from "src/shared/models";
 @Injectable({ providedIn: 'root' })
 export class UserService {
     private changeRequestSubject = new BehaviorSubject<UserList>({ page: 1, pageSize: 10 });
-    changeRequestAction$ = this.changeRequestSubject.asObservable();
+    private changeRequestAction$ = this.changeRequestSubject.asObservable();
 
-    // private pageSubject = new BehaviorSubject<number>(1);
-    // pageChangeAction$ = this.pageSubject.asObservable();
-
-    // private orderingSubject = new BehaviorSubject<Ordering | null>(null);
-    // orderingChangeAction$ = this.orderingSubject.asObservable();
+    // private addUserSubject = new BehaviorSubject<User | null>(null);
+    // private addUserAction$ = this.addUserSubject.asObservable();
 
     userList$ = this.changeRequestAction$.pipe(
         switchMap((request) => this.getUsers(request))
     );
+
+    // addUser$ = this.addUserAction$.pipe(
+    //     switchMap((request) => this.addUser(request))
+    // );
 
     constructor(private readonly http: HttpClient) {
 
@@ -27,17 +28,22 @@ export class UserService {
         this.changeRequestSubject.next({ ...this.changeRequestSubject.value, page });
     }
 
-    // changeOrdering(ordering: Ordering) {
-    //     this.orderingSubject.next(ordering);
-    // }
-
     changeRequest(request: UserList) {
         this.changeRequestSubject.next(request);
     }
 
-    getUsers(request: UserList): Observable<UserList> {
+    // onAddUser(user: User) {
+    //     this.addUserSubject.next(user);
+    // }
+    
+    private getUsers(request: UserList): Observable<UserList> {
         return this.http.get<UserList>('User', { params: this.getQuery(request) });
     }
+    
+    addUser(user: User | null): Observable<void> {
+        return this.http.post<void>('User', user);
+    }
+
 
     private getQuery(request: UserList) {
         const query: { [key: string]: any } = {};
@@ -50,23 +56,5 @@ export class UserService {
         });
 
         return query;
-
-        // if (request.page) {
-        //     query['page'] = request.page;
-        // }
-
-        // if (request.pageSize) {
-        //     query['pageSize'] = request.pageSize;
-        // }
-
-        // if (!!request.key) {
-        //     query['key'] = request.key;
-        // }
-
-        // if (!!request.direction) {
-        //     query['direction'] = request.direction;
-        // }
-
-        // return query;
     }
 }

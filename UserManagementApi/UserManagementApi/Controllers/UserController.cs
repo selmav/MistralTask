@@ -22,5 +22,12 @@ namespace UserManagementApi.Controllers
             var users = await _userService.GetAllUsers(pagination, ordering);
             return BaseResponse<PagedList<UserDto>>.Ok(users);
         }
+
+        [HttpPost]
+        public async Task<BaseResponse<UserDto>> AddUser([FromBody] UserDto userDto)
+        {
+            var user = await _userService.AddUser(userDto);
+            return BaseResponse<UserDto>.Ok(user);
+        }
     }
 }

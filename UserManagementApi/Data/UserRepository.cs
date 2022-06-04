@@ -11,8 +11,11 @@ namespace Data
     public class UserRepository : IUserRepository
     {
         private readonly DbSet<User> _table;
+        private readonly UserManagementContext _context;
+
         public UserRepository(UserManagementContext context)
         {
+            _context = context;
             _table = context.Set<User>();
         }
 
@@ -32,6 +35,13 @@ namespace Data
             return await _table
                 .DoOrdering(order, ordering.Direction)
                 .DoPaging(pagination).ToListAsync();
+        }
+
+        public async Task<User> AddUser(User user)
+        {
+            var res = (await _table.AddAsync(user)).Entity;
+            await _context.SaveChangesAsync();
+            return res;
         }
     }
 }

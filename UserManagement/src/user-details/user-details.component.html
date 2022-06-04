@@ -1,0 +1,38 @@
+<div class="content">
+    <a routerLink="/user-list">&lt; Back to home</a>
+    <form [formGroup]="form">
+        <div>
+            <label for="firstName">First Name: </label>
+            <input type="text" formControlName="firstName" />
+            <span *ngIf="form.controls['firstName'].touched && !form.controls['firstName'].valid">This field is required.</span>
+        </div>
+        
+        <div>
+            <label for="lastName">Last Name: </label>
+            <input type="text" formControlName="lastName" />
+            <span *ngIf="form.controls['lastName'].touched && !form.controls['lastName'].valid">This field is required.</span>
+        </div>
+        
+        <div>
+            <label for="username">Username: </label>
+            <input type="text" formControlName="username" />
+            <span *ngIf="form.controls['username'].touched && !form.controls['username'].valid">This field is required.</span>
+        </div>
+        
+        <div>
+            <label for="password">Password: </label>
+            <input type="password" formControlName="password" />
+            <span *ngIf="form.controls['password'].touched && !form.controls['password'].valid">This field is required.</span>
+        </div>
+        
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" formControlName="email" />
+            <span *ngIf="form.controls['email'].touched && !form.controls['email'].valid">This field is required.</span>
+        </div>
+
+        <!-- <label for="status">Status: </label>
+        <input type="text" formControlName="firstName"/> -->
+        <button type="button" [ngClass]="(form.valid && (loading$ | async) === false) ? 'enabled': 'disabled'" (click)="onSubmit()">Submit</button>
+    </form>
+</div>

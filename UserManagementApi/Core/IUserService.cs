@@ -7,5 +7,7 @@ namespace Core
     public interface IUserService
     {
         Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering);
+
+        Task<UserDto> AddUser(UserDto user);
     }
 }
