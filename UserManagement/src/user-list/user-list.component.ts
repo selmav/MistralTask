@@ -10,7 +10,7 @@ import { User, UserList } from "src/shared/models";
     styleUrls: ['user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-    userList$: Observable<UserList>
+    userList$!: Observable<UserList>
 
     constructor(private readonly userService: UserService) {
 
