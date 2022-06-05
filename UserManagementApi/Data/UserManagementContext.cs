@@ -8,6 +8,7 @@ namespace Data
         public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
         public UserManagementContext(DbContextOptions<UserManagementContext> options) : base(options)
         {
@@ -21,6 +22,7 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Permission>().HasData(Seed.PermissionSeed);
+            modelBuilder.Entity<Status>().HasData(Seed.StatusSeed);
         }
     }
 }

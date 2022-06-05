@@ -2,19 +2,26 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { Filters, User, UserList } from "src/shared/models";
+import { Filters, Status, User, UserList } from "src/shared/models";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private changeRequestSubject = new BehaviorSubject<UserList & Filters>({ page: 1, pageSize: 10 });
+    private readonly defaultRequest = { page: 1, pageSize: 10 };
+    private changeRequestSubject = new BehaviorSubject<UserList & Filters>(this.defaultRequest);
     private changeRequestAction$ = this.changeRequestSubject.asObservable();
 
     userList$ = this.changeRequestAction$.pipe(
         switchMap((request) => this.http.get<UserList>('User', { params: this.getQuery(request) }))
     );
 
+    allStatuses$ = this.http.get<Status[]>('User/statuses');
+
     constructor(private readonly http: HttpClient) {
 
+    }
+
+    resetSearch() {
+        this.changeRequestSubject.next(this.defaultRequest);
     }
 
     changePage(page: number = 1) {

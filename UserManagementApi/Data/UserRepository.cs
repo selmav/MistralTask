@@ -29,15 +29,16 @@ namespace Data
                 "firstName" => (User item) => item.FirstName,
                 "lastName" => (User item) => item.LastName,
                 "username" => (User item) => item.Username,
-                "Email" => (User item) => item.Email,
-                "Status" => (User item) => item.Status,
+                "email" => (User item) => item.Email,
+                "status" => (User item) => item.Status.Name,
                 _ => null
             };
                 
 
             return await DoFiltering(_table, filters)
+                .Include(u => u.Status)
                 .DoOrdering(order, ordering.Direction)
-                .DoPaging(pagination).ToListAsync();
+                .DoPaging(pagination)?.ToListAsync();
         }
 
         public async Task<User> AddUser(User user)
@@ -47,8 +48,10 @@ namespace Data
             return res;
         }
 
-        public async Task<User> GetUserById(int userId) => await _table.Include(u => u.UserPermissions)
-            .Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
+        public async Task<User> GetUserById(int userId) => 
+            await _table.Include(u => u.UserPermissions)
+                        .Include(u => u.Status)
+                        .Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
 

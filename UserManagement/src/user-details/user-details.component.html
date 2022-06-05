@@ -35,14 +35,21 @@
             <span *ngIf="form.controls['email'].touched && !form.controls['email'].valid">This field is required.</span>
         </div>
 
-        <!-- <label for="status">Status: </label>
-        <input type="text" formControlName="firstName"/> -->
-
+        <div class="form-row" *ngIf="statuses$ | async as statuses">
+            <label for="statusId">Status:</label>
+            <select formControlName="statusId">
+                <option value="">Choose status...</option>
+                <option *ngFor="let status of statuses" [value]="status.statusId">{{ status.name }}</option>
+            </select>
+            <span *ngIf="form.controls['statusId'].touched && !form.controls['statusId'].valid">
+                This field is required.
+            </span>
+        </div>
 
         <div class="buttons-wrapper">
             <button *ngIf="userId" class="cancel">Cancel</button>
             <button type="button" [ngClass]="(form.valid && (loading$ | async) === false) ? 'enabled': 'disabled'"
-            (click)="onSubmit()">{{userId ? 'Save' : 'Submit'}}</button>
+                (click)="onSubmit()">{{userId ? 'Save' : 'Submit'}}</button>
         </div>
 
     </form>

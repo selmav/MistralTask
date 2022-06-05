@@ -8,7 +8,7 @@ export interface User {
     username: string;
     password: string;
     email: string;
-    status: string;
+    status: Status;
     permissionIds?: number[];
 }
 
@@ -16,6 +16,11 @@ export interface Permission {
     permissionId: number;
     code: string;
     description: string;
+}
+
+export interface Status {
+    statusId: number;
+    name: string;
 }
 
 // Request/Response models

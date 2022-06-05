@@ -20,6 +20,7 @@ export class UserListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.userService.resetSearch();
         this.userList$ = this.userService.userList$;
     }
 

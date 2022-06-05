@@ -10,8 +10,10 @@ namespace Data.Entities
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string Status { get; set; }
+        public int? StatusId { get; set; }
 
+
+        public virtual Status Status { get; set; }
         public virtual ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

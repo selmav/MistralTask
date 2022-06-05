@@ -1,5 +1,6 @@
 ﻿using Common;
 using Core.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Core
@@ -15,5 +16,7 @@ namespace Core
         Task<UserDto> UpdateUser(UserDto user);
 
         Task<bool> DeleteUser(int? userId);
+
+        Task<IEnumerable<StatusDto>> GetUserStatuses();
     }
 }

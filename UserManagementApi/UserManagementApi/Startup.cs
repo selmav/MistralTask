@@ -50,7 +50,8 @@ namespace UserManagementApi
             // Repository
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPermissionRepository, PermissionRepository>();
-            
+            services.AddTransient<IStatusRepository, StatusRepository>();
+
             // Service
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPermissionService, PermissionService>();

@@ -3,6 +3,7 @@ using Common;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace UserManagementApi.Controllers
 {
@@ -52,6 +53,13 @@ namespace UserManagementApi.Controllers
         {
             await _userService.DeleteUser(userId);
             return BaseResponse<UserDto>.Ok();
+        }
+
+        [HttpGet("statuses")]
+        public async Task<BaseResponse<IEnumerable<StatusDto>>> GetUserStatuses()
+        {
+            var statuses = await _userService.GetUserStatuses();
+            return BaseResponse<IEnumerable<StatusDto>>.Ok(statuses);
         }
     }
 }

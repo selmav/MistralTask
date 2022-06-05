@@ -13,11 +13,13 @@ namespace Core
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+        private readonly IStatusRepository _statusRepository;
 
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public UserService(IMapper mapper, IUserRepository userRepository, IStatusRepository statusRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _statusRepository = statusRepository;
         }
 
         public async Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering, Filtering filters = null)
@@ -81,6 +83,12 @@ namespace Core
             var user = await GetDbUser(userId);
             await _userRepository.DeleteUser(user);
             return true;
+        }
+
+        public async Task<IEnumerable<StatusDto>> GetUserStatuses()
+        {
+            var statuses = await _statusRepository.GetAll();
+            return _mapper.Map<IEnumerable<StatusDto>>(statuses);
         }
 
         private async Task<User> GetDbUser(int? userId)

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, firstValueFrom, take } from "rxjs";
+import { BehaviorSubject, firstValueFrom, Observable, take } from "rxjs";
 import { UserService } from "src/services/user.service";
-import { User } from "src/shared/models";
+import { Status, User } from "src/shared/models";
 
 @Component({
     selector: 'app-user-details',
@@ -17,12 +17,12 @@ export class UserDetailsComponent implements OnInit {
         username: ['', Validators.required],
         password: ['', Validators.required],
         email: ['', Validators.required],
-        // status: ['', Validators.required]
+        statusId: ['', Validators.required]
     });
 
     userId?: number = undefined;
     loading$ = new BehaviorSubject<boolean>(false);
-
+    statuses$: Observable<Status[]> = this.userService.allStatuses$;
 
     constructor(
         private readonly fb: FormBuilder,
@@ -39,7 +39,7 @@ export class UserDetailsComponent implements OnInit {
             this.loading$.next(true);
             this.userService.getUser(this.userId).pipe(take(1)).subscribe(user => {
                 const { userId, status, permissionIds, ...formValue } = user;
-                this.form.setValue(formValue);
+                this.form.setValue({ ...formValue, statusId: status?.statusId ?? '' });
                 this.form.controls['username'].disable();
                 this.form.controls['password'].disable();
                 this.loading$.next(false);
@@ -49,7 +49,11 @@ export class UserDetailsComponent implements OnInit {
 
     onSubmit() {
         if (this.form.valid) {
-            const user = this.form.value as User;
+            const { statusId, ...formValue } = this.form.value;
+            const user: User = {
+                ...formValue,
+                status: { statusId } as Status
+            };
             this.loading$.next(true);
             firstValueFrom(!!this.userId ?
                 this.userService.updateUser({ ...user, userId: this.userId }) :

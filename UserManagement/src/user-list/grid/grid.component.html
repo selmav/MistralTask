@@ -27,7 +27,7 @@
             <td>{{ user.lastName }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.status }}</td>
+            <td>{{ user.status?.name }}</td>
             <td class="action"><a [routerLink]="['../', 'user', user.userId]">Edit</a></td>
             <td class="action"><a (click)="onDelete.emit(user.userId)">Delete</a></td>
             <td class="action"><a [routerLink]="['../', 'user', user.userId, 'permissions']">Assign</a></td>
