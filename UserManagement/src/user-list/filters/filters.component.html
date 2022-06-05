@@ -1,0 +1,29 @@
+<div class="filters-wrapper">
+    <form [formGroup]="form">
+        <div class="form-row">
+            <label for="firstName">First Name: </label>
+            <input type="text" formControlName="firstName" />
+        </div>
+
+        <div class="form-row">
+            <label for="lastName">Last Name: </label>
+            <input type="text" formControlName="lastName" />
+        </div>
+
+        <div class="form-row">
+            <label for="username">Username: </label>
+            <input type="text" formControlName="username" />
+        </div>
+
+        <div class="form-row">
+            <label for="email">Email: </label>
+            <input type="email" formControlName="email" />
+        </div>
+    </form>
+
+    <div class="buttons-wrapper">
+        <button class="cancel" (click)="onClear()">Clear</button>
+        <button (click)="apply.emit(form.value)" [disabled]="!form.touched"
+            [class.disabled]="!form.touched || form.pristine">Apply</button>
+    </div>
+</div>

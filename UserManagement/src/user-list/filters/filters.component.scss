@@ -1,0 +1,68 @@
+@import "../../styles.scss";
+
+.filters-wrapper {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 2rem;
+}
+
+button {
+    width: 8rem;
+    align-self: flex-end;
+    border: 1px solid $black;
+    border-radius: 0.7rem;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+
+    color: $white;
+    background-color: $blue;
+
+    &:hover {
+        background-color: $blue-dark;
+    }
+}
+
+.cancel {
+    color: $black;
+    background-color: $white;
+
+    &:hover {
+        background-color: rgba($blue, 0.1);
+    }
+}
+
+.disabled {
+    color: $black;
+    background-color: $gray;
+    cursor: not-allowed;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 20rem;
+    width: 100%;
+
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    input {
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+        border-width: 1px;
+    }
+}

@@ -57,14 +57,20 @@ button {
         justify-content: flex-end;
         gap: 1.5rem;
 
-        .cancel {
-            border: 1px solid $blue;
-            background-color: $white;
-            color: $black;
-
-            &:hover {
-                background-color: rgba($blue, 0.1);
-            }
-        }
     }
+
+}
+
+.cancel, .filters {
+    border: 1px solid $blue;
+    background-color: $white;
+    color: $black;
+
+    &:hover {
+        background-color: rgba($blue, 0.1);
+    }
+}
+
+.filters {
+    margin-bottom: 2rem;
 }

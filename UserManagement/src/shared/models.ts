@@ -25,6 +25,14 @@ export interface Ordering {
     direction?: OrderDirection;
 }
 
+export interface Filters {
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    email?: string;
+    status?: string;
+}
+
 export interface UserList extends Ordering {
     page: number;
     totalPages?: number;

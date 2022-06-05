@@ -19,7 +19,10 @@ namespace Data
             _table = context.Set<User>();
         }
 
-        public async Task<IEnumerable<User>> GetUsers(Pagination pagination = null, Ordering ordering = null)
+        public async Task<IEnumerable<User>> GetUsers(
+            Pagination pagination = null,
+            Ordering ordering = null,
+            Filtering filters = null)
         {
             Expression<System.Func<User, string>> order = ordering.Key switch
             {
@@ -28,11 +31,11 @@ namespace Data
                 "username" => (User item) => item.Username,
                 "Email" => (User item) => item.Email,
                 "Status" => (User item) => item.Status,
-                _ => ((User item) => string.Empty)
+                _ => null
             };
                 
 
-            return await _table
+            return await DoFiltering(_table, filters)
                 .DoOrdering(order, ordering.Direction)
                 .DoPaging(pagination).ToListAsync();
         }
@@ -53,6 +56,25 @@ namespace Data
         {
             _table.Remove(user);
             await SaveAsync();
+        }
+
+        private IQueryable<User> DoFiltering(IQueryable<User> source, Filtering filters)
+        {
+            if (filters == null ||
+                (string.IsNullOrEmpty(filters.FirstName) &&
+                 string.IsNullOrEmpty(filters.LastName) &&
+                 string.IsNullOrEmpty(filters.UserName) &&
+                 string.IsNullOrEmpty(filters.Email)))
+            {
+                return source;
+            }
+
+            return source.Where(item =>
+                (string.IsNullOrEmpty(filters.FirstName) || item.FirstName.Contains(filters.FirstName)) &&
+                (string.IsNullOrEmpty(filters.LastName) || item.LastName.Contains(filters.LastName)) &&
+                (string.IsNullOrEmpty(filters.UserName) || item.Username.Contains(filters.UserName)) &&
+                (string.IsNullOrEmpty(filters.Email) || item.Email.Contains(filters.Email))
+            );
         }
     }
 }

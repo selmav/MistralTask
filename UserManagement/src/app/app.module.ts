@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPermissionsComponent } from 'src/user-permissions/user-permissions.component';
+import { FiltersComponent } from 'src/user-list/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserPermissionsComponent } from 'src/user-permissions/user-permissions.
     UserListComponent,
     GridComponent,
     UserDetailsComponent,
-    UserPermissionsComponent
+    UserPermissionsComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,

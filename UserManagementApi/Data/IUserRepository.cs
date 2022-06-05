@@ -7,7 +7,7 @@ namespace Data
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetUsers(Pagination pagination = null, Ordering ordering = null);
+        Task<IEnumerable<User>> GetUsers(Pagination pagination = null, Ordering ordering = null, Filtering filters = null);
 
         Task<User> AddUser(User user);
 

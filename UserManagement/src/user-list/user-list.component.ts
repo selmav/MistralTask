@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject, firstValueFrom, Observable, Subject } from "rxjs";
 import { map, switchMap, take } from "rxjs/operators";
 import { UserService } from "src/services/user.service";
-import { Ordering, User, UserList } from "src/shared/models";
+import { Filters, Ordering, User, UserList } from "src/shared/models";
 
 @Component({
     selector: 'app-user-list',
@@ -12,6 +12,8 @@ import { Ordering, User, UserList } from "src/shared/models";
 export class UserListComponent implements OnInit {
     userList$!: Observable<UserList>;
     deleteUser$ = new BehaviorSubject<number | boolean>(false);
+    showFilters$ = new BehaviorSubject<boolean>(false);
+    filters$ = new BehaviorSubject<Filters>({});
 
     constructor(private readonly userService: UserService) {
 
@@ -34,5 +36,11 @@ export class UserListComponent implements OnInit {
         firstValueFrom(this.userService.deleteUser(userId))
             .then(() => this.userService.changeRequest())
             .finally(() => this.deleteUser$.next(false));
+    }
+
+    onApplyFilters(filters: Filters) {
+        this.filters$.next(filters);
+        this.showFilters$.next(false);
+        this.userService.applyFilters(filters);
     }
 }

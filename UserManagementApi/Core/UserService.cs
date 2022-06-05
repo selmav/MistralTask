@@ -20,9 +20,9 @@ namespace Core
             _userRepository = userRepository;
         }
 
-        public async Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering)
+        public async Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering, Filtering filters = null)
         {
-            var users = await _userRepository.GetUsers(pagination, ordering);
+            var users = await _userRepository.GetUsers(pagination, ordering, filters);
 
             var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
 

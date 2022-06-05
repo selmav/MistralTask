@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
+import { EMPTY } from "rxjs";
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
@@ -22,7 +23,7 @@ export class ApiInterceptor implements HttpInterceptor {
             }),
             catchError((error: HttpErrorResponse) => {
                 this.toastService.error(this.getErrorMessage(error.status), "Something went wrong.");
-                return throwError(() => new Error(error.message));
+                return EMPTY;
             })
         );
     }
