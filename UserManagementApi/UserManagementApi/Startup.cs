@@ -1,9 +1,12 @@
 using System.Text.Json;
 using Core;
+using Core.Implementation;
+using Core.Interface;
 using Data;
+using Data.Implementation;
+using Data.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

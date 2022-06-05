@@ -14,7 +14,9 @@ namespace Core
                 .ReverseMap()
                 .ForMember(dest => dest.UserPermissions, opt => opt.Ignore())
                 .ForMember(dest => dest.StatusId, opt => opt.MapFrom(src => src.Status.StatusId))
-                .ForMember(dest => dest.Status, opt => opt.Ignore());
+                .ForMember(dest => dest.Status, opt => opt.Ignore())
+                .ForMember(dest => dest.Username, opt => opt.Ignore())
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
 
             CreateMap<Permission, PermissionDto>().ReverseMap();
 

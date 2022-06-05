@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Core.Models
+namespace Common
 {
     public class BaseResponse<T> where T : class
     {

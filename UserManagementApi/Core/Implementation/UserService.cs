@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Common;
+using Core.Interface;
 using Core.Models;
-using Data;
 using Data.Entities;
+using Data.Interface;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Core
+namespace Core.Implementation
 {
     public class UserService : IUserService
     {

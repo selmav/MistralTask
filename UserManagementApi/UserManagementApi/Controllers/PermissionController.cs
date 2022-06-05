@@ -1,8 +1,9 @@
-﻿using Core;
-using Core.Models;
+﻿using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Common;
+using Core.Interface;
 
 namespace UserManagementApi.Controllers
 {

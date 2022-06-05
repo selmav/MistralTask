@@ -6,11 +6,13 @@
 
     <button class="filters" (click)="showFilters$.next(true)">Filters</button>
 
-    <app-grid *ngIf="userList$ | async as userList; else noResults" [users]="userList.results ?? []"
-        [activePage]="userList.page" [totalPages]="userList.totalPages ?? 0"
-        (pageToggle)="onPageClick($event, userList.page)" (ordering)="onOrdering($event)"
-        (onDelete)="deleteUser$.next($event)">
-    </app-grid>
+    <div *ngIf="userList$ | async as userList; else noResults">
+        <app-grid *ngIf="userList.results?.length; else noResults" [users]="userList.results ?? []"
+            [activePage]="userList.page" [totalPages]="userList.totalPages ?? 0"
+            (pageToggle)="onPageClick($event, userList.page)" (ordering)="onOrdering($event)"
+            (onDelete)="deleteUser$.next($event)">
+        </app-grid>
+    </div>
 
     <ng-template #noResults>
         <div class="no-results">

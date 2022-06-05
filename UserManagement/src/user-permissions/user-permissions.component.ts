@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { firstValueFrom, map, Observable, take, tap } from "rxjs";
+import { firstValueFrom, Observable, take } from "rxjs";
 import { PermissionService } from "src/services/permission.service";
 import { UserService } from "src/services/user.service";
 import { Permission, User } from "src/shared/models";

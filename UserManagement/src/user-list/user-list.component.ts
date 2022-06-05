@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { BehaviorSubject, firstValueFrom, Observable, Subject } from "rxjs";
-import { map, switchMap, take } from "rxjs/operators";
+import { BehaviorSubject, firstValueFrom, Observable } from "rxjs";
 import { UserService } from "src/services/user.service";
-import { Filters, Ordering, User, UserList } from "src/shared/models";
+import { Filters, Ordering, UserList } from "src/shared/models";
 
 @Component({
     selector: 'app-user-list',

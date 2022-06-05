@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject, switchMap } from "rxjs";
+import { BehaviorSubject, Observable, switchMap } from "rxjs";
 import { Permission, UserPermissions } from "src/shared/models";
 
 @Injectable({ providedIn: 'root' })

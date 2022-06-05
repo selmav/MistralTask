@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpStatusCode } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { catchError, map, Observable, throwError } from "rxjs";
+import { catchError, map, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { EMPTY } from "rxjs";
 

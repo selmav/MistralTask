@@ -23,6 +23,11 @@ export interface Status {
     name: string;
 }
 
+export interface UserPermissions {
+    userId?: number;
+    permissionIds: number[]
+}
+
 // Request/Response models
 
 export interface Ordering {
@@ -43,9 +48,4 @@ export interface UserList extends Ordering {
     totalPages?: number;
     pageSize: number;
     results?: User[]
-}
-
-export interface UserPermissions {
-    userId?: number;
-    permissionIds: number[]
 }

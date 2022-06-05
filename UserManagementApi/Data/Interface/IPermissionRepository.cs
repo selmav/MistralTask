@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Data.Interface
 {
     public interface IPermissionRepository
     {

@@ -47,7 +47,7 @@
         </div>
 
         <div class="buttons-wrapper">
-            <button *ngIf="userId" class="cancel">Cancel</button>
+            <button *ngIf="userId" class="cancel" (click)="onCancel()">Cancel</button>
             <button type="button" [ngClass]="(form.valid && (loading$ | async) === false) ? 'enabled': 'disabled'"
                 (click)="onSubmit()">{{userId ? 'Save' : 'Submit'}}</button>
         </div>

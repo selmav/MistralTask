@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
 import { OrderDirection } from "src/shared/ordering/ordering.component";
 import { Ordering, User } from "../../shared/models";
 

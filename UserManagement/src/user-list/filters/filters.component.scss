@@ -44,6 +44,10 @@ button {
     color: $black;
     background-color: $gray;
     cursor: not-allowed;
+
+    &:hover {
+        background-color: $gray;
+    }
 }
 
 form {

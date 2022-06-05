@@ -64,4 +64,8 @@ export class UserDetailsComponent implements OnInit {
                 .finally(() => this.loading$.next(false));
         }
     }
+
+    onCancel() {
+        this.router.navigate(['user-list']);
+    }
 }
