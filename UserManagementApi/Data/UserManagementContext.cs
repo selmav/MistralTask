@@ -17,5 +17,10 @@ namespace Data
         {
             optionsBuilder.UseSqlServer("name=UserManagement");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Permission>().HasData(Seed.PermissionSeed);
+        }
     }
 }
