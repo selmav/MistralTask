@@ -11,6 +11,8 @@ import { ApiInterceptor } from 'src/services/api.interceptor';
 import { SharedModule } from 'src/shared/shared.module';
 import { UserDetailsComponent } from 'src/user-details/user-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      closeButton: true
+    }),
+    BrowserAnimationsModule
   ],
   providers: [
     {

@@ -23,14 +23,8 @@ namespace Core
         public async Task<PagedList<UserDto>> GetAllUsers(Pagination pagination, Ordering ordering)
         {
             var users = await _userRepository.GetUsers(pagination, ordering);
-            var userDtos = new List<UserDto>();
-         
-            // todo: automapper can map list
-            foreach(var user in users)
-            {
-                var u = _mapper.Map<UserDto>(user);
-                userDtos.Add(u);
-            }
+
+            var userDtos = _mapper.Map<IEnumerable<UserDto>>(users);
 
             return new PagedList<UserDto>
             {

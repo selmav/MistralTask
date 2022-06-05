@@ -31,5 +31,11 @@ namespace Core.Models
             Result = null,
             StatusCode = HttpStatusCode.NotFound
         };
+
+        public static BaseResponse<T> InternalServerError() => new BaseResponse<T>
+        {
+            Result = null,
+            StatusCode = HttpStatusCode.InternalServerError
+        };
     }
 }

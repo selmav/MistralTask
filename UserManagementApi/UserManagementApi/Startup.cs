@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using UserManagementApi.Middleware;
 
 namespace UserManagementApi
 {
@@ -71,6 +72,7 @@ namespace UserManagementApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UserManagementApi v1"));
             }
 
+            app.UseMiddleware<ErrorHandling>();
             app.UseHttpsRedirection();
 
             app.UseCors();
