@@ -3,14 +3,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    partial class UserManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220605074538_AddPermissionsTable")]
+    partial class AddPermissionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,13 +93,13 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.UserPermission", b =>
                 {
                     b.HasOne("Data.Entities.Permission", "Permission")
-                        .WithMany("UserPermissions")
+                        .WithMany()
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Data.Entities.User", "User")
-                        .WithMany("UserPermissions")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -105,16 +107,6 @@ namespace Data.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Data.Entities.Permission", b =>
-                {
-                    b.Navigation("UserPermissions");
-                });
-
-            modelBuilder.Entity("Data.Entities.User", b =>
-                {
-                    b.Navigation("UserPermissions");
                 });
 #pragma warning restore 612, 618
         }

@@ -41,7 +41,7 @@ namespace UserManagementApi
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             });
-            //services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+
             services.AddAutoMapper(typeof(ServiceProfile));
 
             services.AddDbContext<UserManagementContext>(opt => 
@@ -49,9 +49,11 @@ namespace UserManagementApi
 
             // Repository
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPermissionRepository, PermissionRepository>();
             
             // Service
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IPermissionService, PermissionService>();
             
             services.AddControllers();
             services.AddSwaggerGen(c =>

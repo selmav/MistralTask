@@ -1,4 +1,6 @@
-﻿namespace Core.Models
+﻿using System.Collections.Generic;
+
+namespace Core.Models
 {
     public class UserDto
     {
@@ -15,5 +17,7 @@
         public string Email { get; set; }
 
         public string Status { get; set; }
+
+        public IEnumerable<int> PermissionIds { get; set; }
     }
 }

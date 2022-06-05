@@ -1,0 +1,17 @@
+<div class="content" *ngIf="user">
+    <a routerLink="/user-list">&lt; Back to home</a>
+
+    <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+
+    <div *ngIf="allPermissions$ | async as allPermissions" class="form-wrapper">
+        <form [formGroup]="form" *ngIf="form">
+            <p *ngFor="let permission of allPermissions">
+                <input type="checkbox" formArrayName="permissions" [value]="permission.permissionId"
+                    (change)="onCheckboxChange($event)" [checked]="isChecked(permission.permissionId)" />
+                <label [for]="permission.permissionId">{{ permission.code }}</label>
+            </p>
+        </form>
+
+        <button (click)="onSubmit()" [disabled]="!form.touched" [class.disabled]="!form.touched">Save</button>
+    </div>
+</div>

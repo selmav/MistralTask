@@ -33,6 +33,7 @@ namespace UserManagementApi.Middleware
             var response = exceptionType switch
             {
                 Type t when t == typeof(ArgumentNullException) => BaseResponse<string>.BadRequest(),
+                Type t when t == typeof(ArgumentException) => BaseResponse<string>.BadRequest(),
                 Type t when t == typeof(NotFoundException) => BaseResponse<string>.NotFound(),
                 _ => BaseResponse<string>.InternalServerError()
             };

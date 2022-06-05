@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailsComponent } from 'src/user-details/user-details.component';
 import { UserListComponent } from 'src/user-list/user-list.component';
+import { UserPermissionsComponent } from 'src/user-permissions/user-permissions.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,18 @@ const routes: Routes = [
     children: [
       {
         path: ':userId',
-        component: UserDetailsComponent
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: UserDetailsComponent
+          },
+          {
+            path: 'permissions',
+            pathMatch: 'full',
+            component: UserPermissionsComponent
+          }
+        ]
       }
     ]
   }

@@ -13,13 +13,15 @@ import { UserDetailsComponent } from 'src/user-details/user-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserPermissionsComponent } from 'src/user-permissions/user-permissions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     GridComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserPermissionsComponent
   ],
   imports: [
     BrowserModule,

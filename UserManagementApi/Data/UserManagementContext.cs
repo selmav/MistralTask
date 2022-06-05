@@ -6,6 +6,8 @@ namespace Data
     public class UserManagementContext: DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
 
         public UserManagementContext(DbContextOptions<UserManagementContext> options) : base(options)
         {

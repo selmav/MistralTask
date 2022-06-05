@@ -38,7 +38,7 @@ export class UserDetailsComponent implements OnInit {
         if (this.userId) {
             this.loading$.next(true);
             this.userService.getUser(this.userId).pipe(take(1)).subscribe(user => {
-                const { userId, status, ...formValue } = user;
+                const { userId, status, permissionIds, ...formValue } = user;
                 this.form.setValue(formValue);
                 this.form.controls['username'].disable();
                 this.form.controls['password'].disable();

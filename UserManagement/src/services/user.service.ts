@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { Ordering, User, UserList } from "src/shared/models";
+import { User, UserList } from "src/shared/models";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

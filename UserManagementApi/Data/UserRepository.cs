@@ -44,7 +44,8 @@ namespace Data
             return res;
         }
 
-        public async Task<User> GetUserById(int userId) => await _table.FindAsync(userId);
+        public async Task<User> GetUserById(int userId) => await _table.Include(u => u.UserPermissions)
+            .Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
 
